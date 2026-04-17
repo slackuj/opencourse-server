@@ -19,6 +19,7 @@ export interface Bullets{
 export interface CodeSnippet {
     id: string;
     fileName: string;
+    language: string;
     code: string;
 }
 
@@ -63,7 +64,7 @@ export interface TextCard {
     id: string;
     title: string;
     paragraph: string;
-    imageUrl: string;
+    imageUrl?: string;
 }
 
 export interface Video {
