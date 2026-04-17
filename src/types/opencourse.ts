@@ -1,3 +1,5 @@
+import {CourseComponentData} from "./components";
+
 export interface course {
     id: string; // ObjectId
     name: string; // name of the course
@@ -10,5 +12,5 @@ export interface lessons {
     id: string; // ObjectId
     lesson: number; // Lesson Number : Lesson 1, Lesson 2, ...
     course: string; // ObjectId of the course
-    contents: string[]; // ObjectId[] of lesson contents
+    contents: CourseComponentData[]; // contents[]
 }

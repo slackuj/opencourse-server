@@ -1,30 +1,28 @@
-import {string} from "zod";
-
 export interface Accordion {
-    id: string;
+    id: string; // ObjectId
     title: string;
     paragraph: string;
 }
 
 export interface BlockHeader {
-    id: string;
+    id: string; // ObjectId
     title: string;
 }
 
 export interface Bullets{
-    id: string;
+    id: string; // ObjectId
     bullets: string[];
 }
 
 export interface CodeSnippet {
-    id: string;
+    id: string; // ObjectId
     fileName: string;
     language: string;
     code: string;
 }
 
 export interface Expert {
-    id: string;
+    id: string; // ObjectId
     name: string;
     role: string;
     company: string;
@@ -32,28 +30,28 @@ export interface Expert {
 }
 
 export interface Infos {
-    id: string;
+    id: string; // ObjectId
     infos: string[];
 }
 
 export interface PagePoster {
-    id: string;
+    id: string; // ObjectId
     title: string;
     imageUrl: string;
 }
 
 export interface Paragraph {
-    id: string;
+    id: string; // ObjectId
     text: string;
 }
 
 export interface Points {
-    id: string;
+    id: string; // ObjectId
     points: string[];
 }
 
 export interface Resource {
-    id: string;
+    id: string; // ObjectId
     title: string;
     description: string;
     btnTitle: string;
@@ -61,13 +59,13 @@ export interface Resource {
 }
 
 export interface TextCard {
-    id: string;
+    id: string; // ObjectId
     title: string;
     paragraph: string;
     imageUrl?: string;
 }
 
 export interface Video {
-    id: string;
+    id: string; // ObjectId
     src: string;
 }
