@@ -1,5 +1,5 @@
 import { Schema, model, Document } from "mongoose";
-import { course, lessons } from "../types/opencourse";
+import { course, lesson } from "../types/opencourse";
 
 // --- Course Model ---
 export interface ICourse extends course, Document {}
@@ -9,12 +9,13 @@ const courseSchema = new Schema<ICourse>({
     description: { type: String, required: true },
     expert: { type: String, ref: 'Expert', required: true },
     lessons: [{ type: String, ref: 'Lesson' }]
+    // you also need to add `isPublished` field later !
 }, { timestamps: true });
 
 export const CourseModel = model<ICourse>("Course", courseSchema);
 
 // --- Lesson Model (Embedded Content) ---
-export interface ILesson extends lessons, Document {}
+export interface ILesson extends lesson, Document {}
 
 const contentSchema = new Schema({
     type: {
@@ -25,7 +26,7 @@ const contentSchema = new Schema({
             'Accordion', 'BlockHeader', 'Bullets', 'CodeSnippet',
             'Expert', 'Infos', 'LessonNavLink', 'PagePoster',
             'Paragraph', 'Points', 'Resource', 'TextCard', 'Video'
-        ]
+        ],
     },
     // Matches the 'props' in CourseComponentData
     props: { type: Schema.Types.Mixed, required: true }
@@ -33,7 +34,8 @@ const contentSchema = new Schema({
 
 const lessonSchema = new Schema<ILesson>({
     lesson: { type: Number, required: true },
-    course: { type: "String", ref: 'Course', required: true },
+    name: { type: String, required: true },
+    course: { type: String, ref: 'Course', required: true },
     contents: [contentSchema]
 }, { timestamps: true });
 

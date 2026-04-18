@@ -8,9 +8,28 @@ export interface course {
     lessons: string[]; // ObjectId[] for course lessons
 }
 
-export interface lessons {
+export interface lesson {
     id: string; // ObjectId
     lesson: number; // Lesson Number : Lesson 1, Lesson 2, ...
+    name: string; // lesson Name
     course: string; // ObjectId of the course
     contents: CourseComponentData[]; // contents[]
 }
+
+export interface CreateCourseRequest {
+    name: string;
+    description: string;
+    expert: string;
+    lessons: string[]; // empty[]
+}
+
+export type UpdateCourseRequest = Partial<CreateCourseRequest>;
+
+export interface CreateLessonRequest {
+    name: string;
+    lesson: number;
+    course: string;
+    contents: CourseComponentData[];
+}
+
+export type UpdateLessonRequest = Partial<CreateLessonRequest>;

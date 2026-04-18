@@ -1,13 +1,22 @@
 import mongoose from "mongoose";
 import { config } from "../config";
 
+// global plugin
+mongoose.plugin( schema => {
+    schema.set("toJSON", {
+        virtuals: true ,
+        versionKey: false,
+        transform: (_doc, ret) => {
+            if (ret._id) delete ret._id;
+            else delete ret.id; // do not return id, as it will be returned as null
+            return ret;
+        }
+    });
+});
+
 export const connectDB = async () => {
     try {
-        if (!config.MONGO_URI) {
-            console.error("MONGO_URI is not defined");
-            process.exit(1);
-        }
-
+        // establish connection
         await mongoose.connect(config.MONGO_URI);
         console.log("Connected to DB");
     }
@@ -15,4 +24,4 @@ export const connectDB = async () => {
         console.log("Error connecting to DB: ", error);
         process.exit(1);
     }
-}
+};
