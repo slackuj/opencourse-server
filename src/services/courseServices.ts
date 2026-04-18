@@ -25,9 +25,9 @@ export const fetchById = async(id: string) => {
     return course;
 };
 
-export const deleteAll = async() => (
-    await CourseModel.deleteMany()
-);
+export const deleteAll = async() => {
+    await CourseModel.deleteMany();
+};
 
 export const deleteByExpertId = async(expertId: string) => {
     const deletedCourses = await CourseModel.deleteMany({expert: expertId});
