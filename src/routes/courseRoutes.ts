@@ -2,10 +2,19 @@ import {Router} from "express";
 import {validateParams, validateRequestBody} from "../middlewares/validator";
 import * as courseController from "../controllers/courseController";
 import {IdSchema} from "../schemas/globalSchema";
+import {CreateCourseRequestSchema, UpdateCourseRequestSchema} from "../schemas/courseSchema";
 
 export const courseRoutes = Router();
-courseRoutes.post("/", validateRequestBody(CreateRoleSchema), authenticate, authorize(appPermissions.CREATE_ROLES.name), courseController.create);
-courseRoutes.patch("/:id", validateParams(IdSchema), validateRequestBody(UpdateRoleSchema), authenticate, authorize(appPermissions.MANAGE_ROLES.name), courseController.updateById);
-courseRoutes.delete("/:id", validateParams(IdSchema), authenticate, authorize(appPermissions.MANAGE_ROLES.name), courseController.deleteById);
-courseRoutes.get("/:id", validateParams(IdSchema), authenticate, authorize(appPermissions.VIEW_ROLES.name), courseController.getById);
-courseRoutes.get("/", authenticate, authorize(appPermissions.VIEW_ROLES.name), courseController.getAll);
+courseRoutes.post("/", validateRequestBody(CreateCourseRequestSchema), courseController.create);
+courseRoutes.patch("/:id", validateParams(IdSchema), validateRequestBody(UpdateCourseRequestSchema),courseController.updateById);
+courseRoutes.delete("/", courseController.deleteAll);
+// Example: /api/courses/1719...
+courseRoutes.delete("/:id", validateParams(IdSchema), courseController.deleteById);
+// Example: /api/courses/expert/1719...
+courseRoutes.delete("/expert/:id", validateParams(IdSchema), courseController.deleteByExpertId);
+// fetchAll
+courseRoutes.get("/", courseController.fetchAll);
+// Example: /api/courses/1719...
+courseRoutes.get("/:id", validateParams(IdSchema), courseController.fetchById);
+// Example: /api/courses/expert/1719...
+courseRoutes.get("/expert/:id", validateParams(IdSchema), courseController.fetchByExpertId);
